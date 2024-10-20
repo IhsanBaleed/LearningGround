@@ -52,6 +52,25 @@ void template_func_test_4() {
     template_func_10<5>();
 }
 
+// same rule applies here, where the definition of the template class must be in the header file
+// template <typename T, typename T2>
+// template_class<T, T2>::template_class() {
+//     std::cout << "Template Class Constructor" << std::endl;
+// } 
 
+void template_class_test() {
+    
+    template_class<double, double> t;
+    t.print();
 
+    template_class<int, double> t2;
+    t2.print();
+
+    template_class<int, float> t3;
+    t3.print();
+}
+
+void template_class_test_2() {
+
+}
 

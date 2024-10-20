@@ -15,7 +15,8 @@
 
 int main() {
 
-    template_func_test_4();
+
+    template_class_test();
 
 
     return 0;

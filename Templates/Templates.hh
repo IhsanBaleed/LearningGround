@@ -105,6 +105,78 @@ void template_func_10() {
 }
 
 
+class ObjectTest {
+
+public:
+
+    void do_something() {
+        std::cout << "Object Test Do Something" << std::endl;
+    }
+};
+
+class ObjectTest2 {
+
+public:
+
+    void do_something_else() {
+        std::cout << "Object2 Test Do Something else" << std::endl;
+    }
+};
+
+template <typename T, typename T2>
+class template_class {
+
+public:
+    template_class() {
+        std::cout << "Template Class Constructor" << std::endl;
+        // t.do_something(); // type checking is done at compile time
+    }
+
+    void print() {
+        std::cout << "Template Class Print" << std::endl;
+    }
+
+private:
+    T t;
+    T2 t2;
+};
+
+template <> // full specialization
+class template_class<int, double> {
+public:
+
+    template_class() {
+        std::cout << "Specialization Template Class Constructor" << std::endl;
+    }
+
+    void print() {
+        std::cout << "Specialization Template Class Print" << std::endl;
+    }
+
+private:
+    int t;
+    double t2;
+};
+
+template <typename T> // partial specialization
+class template_class<int, T> {
+public:
+
+    template_class() {
+        std::cout << "Partial Specialization Template Class Constructor" << std::endl;
+    }
+
+    void print() {
+        std::cout << "Partial Specialization Template Class Print" << std::endl;
+    }
+
+private:
+    int t;
+    T t2;
+};
+
+
+
 void tempalte_func_test();
 
 void tempalte_func_test_1();
@@ -117,4 +189,7 @@ void template_func_test_4();
 
 void template_func_test_5();
 
+void template_class_test();
+
+void template_class_test_2();
 
