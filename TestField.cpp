@@ -10,9 +10,12 @@
 #include <chrono>
 #include <iomanip>
 
+#include "Templates/Templates.hh"
+
 
 int main() {
 
+    template_func_test_4();
 
 
     return 0;
