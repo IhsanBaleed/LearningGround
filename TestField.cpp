@@ -10,14 +10,12 @@
 #include <chrono>
 #include <iomanip>
 
-#include "Templates/Templates.hh"
+#include "Operators/Operators.hh"
 
 
 int main() {
 
-
-    template_class_test();
-
+    test_case_5();
 
     return 0;
 }

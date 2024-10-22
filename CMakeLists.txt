@@ -11,6 +11,7 @@ add_subdirectory(Polymorphism)
 add_subdirectory(Interfaces)
 add_subdirectory(Lambda)
 add_subdirectory(Templates)
+add_subdirectory(Operators)
 
 add_executable(TestField TestField.cpp)
 
@@ -22,5 +23,6 @@ target_link_libraries(TestField PUBLIC Pointers
                                        Polymorphism
                                        Interfaces
                                        Lambda
-                                       Templates)
+                                       Templates
+                                       Operators)
 
