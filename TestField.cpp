@@ -10,13 +10,14 @@
 #include <chrono>
 #include <iomanip>
 
-#include "Operators/Operators.hh"
+#include "Static/Static.hpp"
 
 
 int main() {
 
-    test_case_6();
+    test_static_6();
 
+    std::cout << "end of main" << std::endl;
     return 0;
 }
 
