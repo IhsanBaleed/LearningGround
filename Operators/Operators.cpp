@@ -6,6 +6,11 @@ void operator - (const dummy& d1, const dummy& d2) {
     std::cout << "operator - (const dummy& d1, const dummy& d2)" << std::endl;
 }
 
+std::ostream& operator<<(std::ostream& os, const toy& t) {
+    os << "toy size: " << t.size;
+    return os;
+}
+
 // At least one of the params must be of the class type, and the other can be of any type
 // void operator - (const int& d1, const int& d2) { 
 //     std::cout << "operator - (const dummy& d1, const dummy& d2)" << std::endl;
@@ -58,4 +63,10 @@ void test_case_5(){
 
 }
 
+void test_case_6() {
+    toy t;
+    t.size = 5;
+
+    std::cout << t << std::endl;
+}
 

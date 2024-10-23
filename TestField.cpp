@@ -15,7 +15,7 @@
 
 int main() {
 
-    test_case_5();
+    test_case_6();
 
     return 0;
 }

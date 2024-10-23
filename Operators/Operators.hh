@@ -6,8 +6,6 @@
 
 class toy {
 
-    int size = 0;
-
 public:
 
     void operator ++(int value){ // postfix operator, x++;
@@ -18,8 +16,9 @@ public:
         std::cout << "operator ++()" << std::endl;
     }
 
-    
+    friend std::ostream& operator<<(std::ostream& os, const toy& t);
 
+    int size = 0;
 };
 
 
@@ -44,6 +43,7 @@ public:
         name += " toy";
         std::cout << "new name: " << name << std::endl;
     }
+
 
 // this would not work, since operator + can only take zero or one argument
 // the + operator takes an implicit this pointer, when defined in this class context
@@ -99,3 +99,5 @@ void test_case_3();
 void test_case_4();
 
 void test_case_5();
+
+void test_case_6();
