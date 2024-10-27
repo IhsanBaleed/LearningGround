@@ -15,7 +15,6 @@
 
 int main() {
 
-    test_static_6();
 
     std::cout << "end of main" << std::endl;
     return 0;

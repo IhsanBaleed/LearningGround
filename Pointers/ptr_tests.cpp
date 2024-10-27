@@ -125,3 +125,14 @@ void uniqe_ptr_test() {
 
 }
 
+void unique_ptr_test_2() {
+    std::unique_ptr<parent> p_unique;
+
+    parent* p = new parent(7);
+    p_unique = std::unique_ptr<parent>(p);
+
+    std::unique_ptr<parent> p_unique2(p); // will cause a double deletion and a segfault
+
+    std::unique_ptr<parent> p_unique3 = std::make_unique<child>();
+}
+

@@ -30,6 +30,13 @@ struct parent {
 
 };
 
+struct child : parent {
+
+    child () {
+        std::cout << "child constructor" << std::endl;
+    }
+};
+
 
 
 void ptr_test();
@@ -51,3 +58,5 @@ int& ref_bug();
 void assign_shared_ptr_val(parent& p);
 
 void uniqe_ptr_test();
+
+void unique_ptr_test_2();
