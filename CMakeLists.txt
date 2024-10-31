@@ -13,6 +13,7 @@ add_subdirectory(Lambda)
 add_subdirectory(Templates)
 add_subdirectory(Operators)
 add_subdirectory(Static)
+add_subdirectory(Threads)
 
 add_executable(TestField TestField.cpp)
 
@@ -26,5 +27,6 @@ target_link_libraries(TestField PUBLIC Pointers
                                        Lambda
                                        Templates
                                        Operators
-                                       Static)
+                                       Static
+                                       Threads)
 

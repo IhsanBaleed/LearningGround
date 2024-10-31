@@ -10,13 +10,14 @@
 #include <chrono>
 #include <iomanip>
 
-#include "Static/Static.hpp"
+#include "Threads/Threads.hh"
 
+#include <map>
 
 int main() {
 
+    test_thread_5();
 
-    std::cout << "end of main" << std::endl;
     return 0;
 }
 
