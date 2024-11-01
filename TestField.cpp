@@ -10,13 +10,14 @@
 #include <chrono>
 #include <iomanip>
 
-#include "Threads/Threads.hh"
+#include "DS/DS.hh"
 
 #include <map>
 
 int main() {
 
-    test_thread_5();
+
+    test_SLS_3();
 
     return 0;
 }
