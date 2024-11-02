@@ -17,7 +17,7 @@
 int main() {
 
 
-    test_SLS_3();
+    test_DLL_6();
 
     return 0;
 }

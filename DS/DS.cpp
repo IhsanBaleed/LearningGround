@@ -25,71 +25,188 @@ void test_stack_1() {
 
 }
 
-void test_SLS_1() {
+void test_SLL_1() {
 
-    SingleLinkedList<int> sls;
+    SingleLinkedList<int> sll;
     
-    sls.print_items();
-    sls.insert_at_beginning(22);
-    sls.insert_at_beginning(25);
-    sls.print_items();
+    sll.print_items();
+    sll.insert_at_beginning(22);
+    sll.insert_at_beginning(25);
+    sll.print_items();
 
-    sls.insert_at_end(13);
-    sls.print_items();
+    sll.insert_at_end(13);
+    sll.print_items();
 
-    sls.insert_at_index(2, 9);
-    sls.insert_at_index(1, 10);
-    sls.insert_at_index(22, 8);
-    sls.print_items();
+    sll.insert_at_index(2, 9);
+    sll.insert_at_index(1, 10);
+    sll.insert_at_index(22, 8);
+    sll.print_items();
 
 }
 
-void test_SLS_2() {
-    SingleLinkedList<int> sls;
+void test_SLL_2() {
+    SingleLinkedList<int> sll;
 
-    sls.delete_at_start();
-    sls.delete_at_end();
+    sll.delete_at_start();
+    sll.delete_at_end();
 
-    sls.insert_at_end(99);
-    sls.insert_at_end(12);
-    sls.insert_at_end(123);
-    sls.insert_at_end(155);
-    sls.insert_at_end(98);
-    sls.print_items();
+    sll.insert_at_end(99);
+    sll.insert_at_end(12);
+    sll.insert_at_end(123);
+    sll.insert_at_end(155);
+    sll.insert_at_end(98);
+    sll.print_items();
 
-    sls.delete_at_start();
-    sls.print_items();
+    sll.delete_at_start();
+    sll.print_items();
 
-    sls.delete_at_end();
-    sls.print_items();
+    sll.delete_at_end();
+    sll.print_items();
 
-    sls.delete_at_index(4);
-    sls.print_items();
-    sls.delete_at_index(2);
-    sls.print_items();
-    sls.delete_at_index(2);
-    sls.print_items();
-    sls.delete_at_index(1);
-    sls.print_items();
+    sll.delete_at_index(4);
+    sll.print_items();
+    sll.delete_at_index(2);
+    sll.print_items();
+    sll.delete_at_index(2);
+    sll.print_items();
+    sll.delete_at_index(1);
+    sll.print_items();
 }
 
-void test_SLS_3() {
-    SingleLinkedList<int> sls;
+void test_SLL_3() {
+    SingleLinkedList<int> sll;
 
-    std::cout << "val = " << sls.get_first_item() << std::endl;
-    sls.get_last_item();
-    sls.get_item(3);
+    std::cout << "val = " << sll.get_first_item() << std::endl;
+    sll.get_last_item();
+    sll.get_item(3);
     
-    sls.insert_at_beginning(14);
-    sls.insert_at_beginning(22);
-    sls.insert_at_beginning(28);
-    std::cout << "val = " << sls.get_first_item() << std::endl;
-    std::cout << "val = " << sls.get_last_item() << std::endl;
-    std::cout << "val = " << sls.get_item(3) << std::endl;
-    std::cout << "val = " << sls.get_item(9) << std::endl;
+    sll.insert_at_beginning(14);
+    sll.insert_at_beginning(22);
+    sll.insert_at_beginning(28);
+    std::cout << "val = " << sll.get_first_item() << std::endl;
+    std::cout << "val = " << sll.get_last_item() << std::endl;
+    std::cout << "val = " << sll.get_item(3) << std::endl;
+    std::cout << "val = " << sll.get_item(9) << std::endl;
 
 
 }
 
+void test_DLL_1(){
+    DoubleLinkedList<int> dll;
 
+    dll.insert_at_beginning(22);
+    dll.insert_at_beginning(44);
+    dll.insert_at_beginning(100);
+
+    dll.insert_at_end(7);
+}
+
+void test_DLL_2() {
+    DoubleLinkedList<int> dll;
+
+    dll.insert_at_beginning(23);
+    dll.insert_at_index(2,44);
+    dll.insert_at_index(3, 99);
+    dll.display_items();
+    dll.insert_at_index(2, 88);
+    dll.display_items();
+
+    dll.insert_at_index(55, 88);
+    dll.display_items();
+}
+
+void test_DLL_3() {
+    DoubleLinkedList<int> dll;
+
+    dll.delete_at_end();
+    dll.insert_at_beginning(22);
+    dll.insert_at_beginning(45);
+    dll.insert_at_beginning(78);
+    dll.display_items();
+
+    dll.delete_at_end();
+    dll.display_items();
+
+    dll.delete_at_end();
+    dll.display_items();
+
+    dll.delete_at_end();
+    dll.display_items();
+
+    dll.delete_at_end();
+}
+
+void test_DLL_4() {
+    DoubleLinkedList<int> dll;
+
+    dll.delete_at_beginning();
+    dll.insert_at_beginning(24);
+    dll.display_items();
+    dll.delete_at_beginning();
+
+    dll.insert_at_beginning(23);
+    dll.insert_at_beginning(55);
+    dll.insert_at_beginning(77);
+    dll.display_items();
+
+    dll.delete_at_beginning();
+    dll.display_items();
+
+    dll.delete_at_beginning();
+    dll.display_items();
+
+    dll.delete_at_beginning();
+    dll.display_items();
+
+    dll.delete_at_beginning();
+}
+
+void test_DLL_5() {
+    DoubleLinkedList<int> dll;
+
+    dll.delete_at_index(3);
+
+    dll.insert_at_beginning(4);
+    dll.insert_at_beginning(8);
+    dll.insert_at_beginning(55);
+    dll.insert_at_beginning(33);
+    dll.insert_at_index(2, 14);
+    dll.display_items();
+
+    dll.delete_at_index(3);
+    dll.display_items();
+    dll.delete_at_index(1);
+    dll.display_items();
+    dll.delete_at_index(1);
+    dll.display_items();
+    dll.delete_all();
+
+    dll.insert_at_beginning(33);
+    dll.insert_at_beginning(2);
+    dll.insert_at_beginning(55);
+    dll.insert_at_beginning(67);
+    dll.display_items();
+    dll.delete_all();
+    dll.display_items();
+}
+
+void test_DLL_6() {
+    DoubleLinkedList<int> dll;
+
+    std::cout << dll.get_start() << std::endl;
+    std::cout << dll.get_end() << std::endl;
+    std::cout << dll.get_at_index(1) << std::endl;
+    std::cout << dll.get_at_index(5) << std::endl;
+
+    dll.insert_at_beginning(3);
+    dll.insert_at_beginning(44);
+    dll.insert_at_beginning(436);
+    dll.insert_at_beginning(12);
+    dll.insert_at_beginning(66);
+
+    std::cout << dll.get_at_index(1) << std::endl;
+    std::cout << dll.get_at_index(7) << std::endl;
+    std::cout << dll.get_at_index(5) << std::endl;
+    std::cout << dll.get_at_index(3) << std::endl;
+}
 

@@ -2,7 +2,7 @@
 #include <iostream>
 
 
-// array, linked list, queue, map, set, tree, hash tables, iterators
+// array, queue, map, set, tree, hash tables, iterators
 
 template <typename T>
 class Stack {
@@ -86,7 +86,7 @@ public:
 
     void print_items() {
         if (!head) {
-            std::cout << "No Items in the SLS" << std::endl;
+            std::cout << "No Items in the SLL" << std::endl;
             return;
         }
         Node* current = head;
@@ -202,7 +202,7 @@ public:
 
     void delete_at_index(int index) {
         if (!head || index < 1) {
-            std::cout << "SLS is empty, cant delete" << std::endl;
+            std::cout << "SLL is empty, cant delete" << std::endl;
         }
         if (index == 1) {
             delete_at_start();
@@ -226,13 +226,13 @@ public:
         if(head){
             return head->val;
         }
-        std::cout << "SLS is empty" << std::endl;
+        std::cout << "SLL is empty" << std::endl;
         return T();
     }
 
     T get_last_item() {
         if (!head) {
-            std::cout << "SLS is empty" << std::endl;
+            std::cout << "SLL is empty" << std::endl;
             return T();
         }
         if (!head->next) {
@@ -247,14 +247,14 @@ public:
 
     T get_item(int index) {
         if (!head) {
-            std::cout << "SLS is empty" << std::endl;
+            std::cout << "SLL is empty" << std::endl;
             return T();
         }
         if (index == 1) {
             return get_first_item();
         }
         if (!head->next) {
-            std::cout << "Only one item in SLS, here it is: " << head->val << std::endl;
+            std::cout << "Only one item in SLL, here it is: " << head->val << std::endl;
             return get_first_item();
         }
 
@@ -272,11 +272,258 @@ public:
     }
 };
 
+template <typename T>
+class DoubleLinkedList {
 
+    struct Node {
+        T data;
+        Node* next = nullptr;
+        Node* before = nullptr;
+
+        Node() = default;
+        Node(T data): data(data){}
+    };
+
+    Node* head;
+    Node* end;
+
+public:
+
+    DoubleLinkedList(): head(NULL), end(NULL)
+    {}
+
+    ~DoubleLinkedList() {
+        delete_all();
+    }
+
+    void insert_at_beginning(T item) {
+        if (!head) {
+            head = new Node(item);
+            end = head;
+            return;
+        }
+        Node* new_item = new Node(item);
+        
+        new_item->next = head;
+        head->before = new_item;
+        head = new_item;
+    }
+
+    void insert_at_end(T item) {
+        if (!head) {
+            insert_at_beginning(item);
+            return;
+        }
+        Node* new_item = new Node(item);
+        
+        new_item->before = end;
+        end->next = new_item;
+        end = new_item;
+    }
+
+    void insert_at_index(int index, T item) {
+        if (!head) {
+            std::cout << "Error, no items. Inserting at the start" << std::endl;
+            insert_at_beginning(item);
+            return;
+        }
+        if (index == 1 || index <= 0) {
+            insert_at_beginning(item);
+            return;
+        }
+        if (head == end) {
+            std::cout << "List has one item, inserting at end" << std::endl;
+            insert_at_end(item);
+            return;
+        }
+
+
+        Node* current_item = head;
+        int i=1;
+        while (i < index-1 && current_item->next) {
+            current_item = current_item->next;
+            i++;
+        }
+
+        if (!current_item->next) {
+            if (i < index-1) {
+                std::cout << "Trying to insert out of bounds, Will insert at the end" << std::endl;
+            }
+            insert_at_end(item);
+            return;
+        }
+
+        Node* new_item = new Node(item);
+        new_item->next = current_item->next;
+        new_item->before = current_item;
+        
+        current_item->next = new_item;
+        new_item->next->before = new_item;
+    }
+
+    void display_items() {
+        if(!head) {
+            std::cout << "List has no items" << std::endl;
+            return;
+        }
+        
+        Node* current_item = head;
+        std::cout << "NULL -> ";
+        while (current_item) {
+            std::cout << current_item->data << " -> ";
+            current_item = current_item->next;
+        }
+        std::cout << "NULL" << std::endl;
+    }
+
+    void delete_at_beginning() {
+        if (!head) {
+            std::cout << "No Items to delete" << std::endl;
+            return;
+        }
+        if (head == end) {
+            delete head;
+            head = nullptr;
+            end = nullptr;
+            return;
+        }
+        Node* new_head = head->next;
+
+        delete head;
+        head = new_head;
+        new_head->before = nullptr;
+    }
+
+    void delete_at_end() {
+        if (!end) {
+            std::cout << "No Items to delete" << std::endl;
+            return;
+        }
+        if (head == end) {
+            delete end;
+            end = nullptr;
+            head = nullptr;
+            return;
+        }
+        
+        Node* new_end = end->before;
+        delete end;
+        end = new_end;
+        end->next = nullptr;
+    }
+
+    void delete_at_index(int index) {
+        if (!head) {
+            std::cout << "No Items to remove" << std::endl;
+            return;
+        }
+        if (index == 1) {
+            delete_at_beginning();
+            return;
+        }
+        if (head == end) {
+            std::cout << "List has one item, choose correct index" << std::endl;
+            return;
+        }
+
+        int i=1;
+        Node* current_item = head;
+        while (i < index-1 && current_item->next) {
+            current_item = current_item->next;
+            i++;
+        }
+       
+        if (!current_item->next) {
+            std::cout << "Index out of bounds" << std::endl;
+            return;
+        }
+
+        if(!current_item->next->next) {
+            delete_at_end();
+            return;
+        }
+
+        Node* deleted_item = current_item->next;
+
+        current_item->next = deleted_item->next;
+        deleted_item->next->before = current_item;
+        delete deleted_item;
+    }
+
+    void delete_all() {
+        if (!head) {
+            std::cout << "All items deleted" << std::endl;
+            return;
+        }
+        if (head == end) {
+            delete_at_beginning();
+            return;
+        }
+
+        Node* current_item = head;
+        Node* next_item;
+        while(next_item) {
+            next_item = current_item->next;
+            delete current_item;
+            current_item = next_item;
+        }
+        head = nullptr;
+        end = nullptr;
+    }
+
+    T get_start() {
+        if (head) {
+            return head->data;
+        }
+        std::cout << "List has no items" << std::endl;
+        return T();
+    }
+
+    T get_end() {
+        if (end) {
+            return end->data;
+        }
+        std::cout << "List has no items" << std::endl;
+        return T();
+    }
+
+    T get_at_index(int index) {
+        if (index == 1) {
+            return get_start();
+        }
+
+        if (!head) {
+            std::cout << "List has no items" << std::endl;
+            return T();
+        }
+
+        Node* current_item = head;
+        int i = 1;
+        while (i <index && current_item->next) {
+            current_item = current_item->next;
+            i++;
+        }
+
+        if (i < index) {
+            std::cout << "Index out of bounds" << std::endl;
+            return T();
+        }
+
+        return current_item->data;
+    }
+
+};
 
 
 void test_stack_1();
 
-void test_SLS_1();
-void test_SLS_2();
-void test_SLS_3();
+void test_SLL_1();
+void test_SLL_2();
+void test_SLL_3();
+
+void test_DLL_1();
+void test_DLL_2();
+void test_DLL_3();
+void test_DLL_4();
+void test_DLL_5();
+void test_DLL_6();
