@@ -15,6 +15,7 @@ add_subdirectory(Operators)
 add_subdirectory(Static)
 add_subdirectory(Threads)
 add_subdirectory(DS)
+add_subdirectory(LR_Vals)
 
 add_executable(TestField TestField.cpp)
 
@@ -30,5 +31,6 @@ target_link_libraries(TestField PUBLIC Pointers
                                        Operators
                                        Static
                                        Threads
-                                       DS)
+                                       DS
+                                       LR_Vals)
 

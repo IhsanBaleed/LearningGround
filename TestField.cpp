@@ -11,13 +11,11 @@
 #include <iomanip>
 
 #include "DS/DS.hh"
+#include "LR_Vals/LR_vals.hh"
 
 #include <map>
 
 int main() {
-
-
-    test_DLL_6();
 
     return 0;
 }
