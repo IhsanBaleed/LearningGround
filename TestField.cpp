@@ -11,11 +11,12 @@
 #include <iomanip>
 
 #include "DS/DS.hh"
-#include "LR_Vals/LR_vals.hh"
 
 #include <map>
 
 int main() {
+
+    test_qu_1();
 
     return 0;
 }

@@ -1,8 +1,9 @@
 #pragma once
 #include <iostream>
+#include <vector>
 
 
-// array, queue, map, set, tree, hash tables, iterators
+// array, map, set, tree, hash tables, iterators
 
 template <typename T>
 class Stack {
@@ -514,6 +515,57 @@ public:
 
 };
 
+template <typename T>
+class Queue {
+
+    std::vector<T> data;
+
+public:
+
+    void queue(T item) {
+        data.push_back(item);
+    }
+
+    T dequeue() {
+        if (!data.empty()) {
+            T item = data[0];
+            data.erase(data.begin());
+            return item;
+        }
+        return T();
+    }
+
+    void print_queue() {
+        for (auto& item : data) {
+            std::cout << item << " " ;
+        }
+        std::cout << std::endl;
+    }
+
+    T front() {
+        if(!data.empty()) 
+            return data[0];
+        
+        return T();
+    }
+
+    T rear() {
+        if(!data.empty())
+            return data[data.size()-1];
+        
+        return T();
+    }
+
+    bool is_empty() {
+        return data.empty();
+    }
+
+    int size() {
+        return data.size();
+    }
+
+
+};
 
 void test_stack_1();
 
@@ -527,3 +579,5 @@ void test_DLL_3();
 void test_DLL_4();
 void test_DLL_5();
 void test_DLL_6();
+
+void test_qu_1();

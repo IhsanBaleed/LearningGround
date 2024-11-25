@@ -210,3 +210,33 @@ void test_DLL_6() {
     std::cout << dll.get_at_index(3) << std::endl;
 }
 
+void test_qu_1() {
+    Queue<int> q1;
+
+    q1.queue(4);
+    q1.queue(2);
+    q1.queue(6);
+    q1.queue(77);
+
+    std::cout << q1.front() << std::endl;
+    std::cout << q1.rear() << std::endl;
+
+    if(q1.is_empty()) {
+        std::cout << "Empty" << std::endl;
+    }
+    q1.print_queue();
+    std::cout << q1.size() << std::endl;
+
+    q1.dequeue();       q1.print_queue();
+    q1.dequeue();       q1.print_queue();
+    q1.dequeue();       q1.print_queue();
+    std::cout << q1.front() << std::endl;
+    std::cout << q1.rear() << std::endl;
+
+    q1.dequeue(); 
+    std::cout << q1.size() << std::endl;
+
+    if(q1.is_empty()) {
+        std::cout << "Empty" << std::endl;
+    }
+}
