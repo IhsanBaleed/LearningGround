@@ -1,9 +1,10 @@
 #pragma once
 #include <iostream>
 #include <vector>
+#include <list>
 
 
-// array, map, set, tree, hash tables, iterators
+// array, map, set, tree, iterators
 
 template <typename T>
 class Stack {
@@ -567,6 +568,79 @@ public:
 
 };
 
+class HashTable {
+
+private:
+    // a collection of lists, each list holding pairs of data.
+    std::vector<std::list<std::pair<std::string, int>>> table;
+
+    int numBuckets;
+
+    int hashFunction(const std::string& key) {
+        int hash = 0;
+        for (char ch : key) {
+            hash = (hash * 31 + ch) % numBuckets;
+        }
+        return hash;
+    }
+
+public:
+
+    // num of buckets determines the likelihood of collisions.
+    HashTable(int size) : numBuckets(size) {
+        table.resize(numBuckets);
+    }
+
+    void insert(const std::string& key, int value) {
+        int index = hashFunction(key); // this will decide to which bucket the data goes to.
+        for (auto& pair : table[index]) {
+            if (pair.first == key) {
+                pair.second = value; // Update value if key already exists
+                return;
+            }
+        }
+        table[index].emplace_back(key, value); // Insert new key-value pair
+    }
+
+    void remove(const std::string& key) {
+        int index = hashFunction(key); // find the bucket
+        auto& pairs = table[index];
+        for (auto it = pairs.begin(); it != pairs.end(); ++it) { // look through it
+            if (it->first == key) {
+                pairs.erase(it); // remove when found
+                return;
+            }
+        }
+    }
+
+    int search(const std::string& key) {
+        int index = hashFunction(key);
+        for (const auto& pair : table[index]) {
+            if (pair.first == key) {
+                return pair.second;
+            }
+        }
+        throw std::runtime_error("Key not found");
+    }
+
+    void display() {
+        for (int i = 0; i < numBuckets; ++i) {
+            std::cout << "Bucket " << i << ": ";
+            for (const auto& pair : table[i]) {
+                std::cout << "(" << pair.first << ", " << pair.second << ") ";
+            }
+            std::cout << std::endl;
+        }
+    }
+
+};
+
+
+
+
+
+
+// Testing ---------------------------------------
 void test_stack_1();
 
 void test_SLL_1();
@@ -581,3 +655,5 @@ void test_DLL_5();
 void test_DLL_6();
 
 void test_qu_1();
+
+void test_ht_1();

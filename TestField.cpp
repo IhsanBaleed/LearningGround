@@ -16,7 +16,7 @@
 
 int main() {
 
-    test_qu_1();
+    test_ht_1();
 
     return 0;
 }

@@ -240,3 +240,27 @@ void test_qu_1() {
         std::cout << "Empty" << std::endl;
     }
 }
+
+void test_ht_1() {
+
+    HashTable cars(4);
+    
+    cars.insert("BMW", 1960);
+    cars.insert("Porche", 1982);
+    cars.insert("Honda", 2007);
+    cars.insert("Mini", 2013);
+
+    cars.display();
+
+    cars.insert("BMW", 1990);
+    cars.display();
+
+    cars.remove("Honda");
+    cars.remove("Audi");
+    cars.display();
+
+    std::cout << "Searching for a mini: " << cars.search("Mini") << std::endl;
+
+
+}
+
