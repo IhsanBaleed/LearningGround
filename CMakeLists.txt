@@ -16,6 +16,7 @@ add_subdirectory(Static)
 add_subdirectory(Threads)
 add_subdirectory(DS)
 add_subdirectory(LR_Vals)
+add_subdirectory(Macros)
 
 add_executable(TestField TestField.cpp)
 
@@ -32,5 +33,6 @@ target_link_libraries(TestField PUBLIC Pointers
                                        Static
                                        Threads
                                        DS
-                                       LR_Vals)
+                                       LR_Vals
+                                       Macros)
 

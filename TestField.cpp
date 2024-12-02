@@ -11,12 +11,12 @@
 #include <iomanip>
 
 #include "DS/DS.hh"
+#include "Macros/Macros.hh"
 
-#include <map>
 
 int main() {
 
-    test_ht_1();
+    macro_func_1();
 
     return 0;
 }
