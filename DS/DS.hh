@@ -2,9 +2,9 @@
 #include <iostream>
 #include <vector>
 #include <list>
+#include <queue>
 
-
-// array, map, set, tree, iterators
+// array, map, set
 
 template <typename T>
 class Stack {
@@ -635,7 +635,193 @@ public:
 
 };
 
+template <typename T>
+class BinaryTree {
 
+    struct Node {
+        T val;
+        Node* left = nullptr;
+        Node* right = nullptr;
+
+        Node (T val) {
+            this->val = val;
+        }
+    };
+
+public: 
+
+    BinaryTree(std::vector<T> data) {
+        if (data.empty()) return;
+
+        tree = new Node(data[0]);
+        std::queue<Node*> q;
+        q.push(tree);
+
+        size_t i = 1;
+        while (i < data.size()) {
+            Node* current = q.front();
+            q.pop();
+
+            if (i < data.size()) {
+                current->left = new Node(data[i++]);
+                q.push(current->left);
+            }
+            if (i < data.size()) {
+                current->right = new Node(data[i++]);
+                q.push(current->right);
+            }
+        }
+    }
+
+    ~BinaryTree() {
+        clear(tree);
+    }
+
+    void traversal_dfs() {
+        dfs_traversal(tree);
+        std::cout << std::endl;
+    }
+
+    void traversal_bfs() {
+
+        if (tree == nullptr) return;
+
+        std::queue<Node*> nodes;
+        nodes.push(tree);
+
+        while (!nodes.empty()) {
+            
+            Node* node = nodes.front();
+            nodes.pop();
+
+            std::cout << node->val << " ";
+
+            if (node->left != nullptr)   nodes.push(node->left);
+            if (node->right != nullptr)  nodes.push(node->right);
+        }
+        std::cout << std::endl;
+    }
+
+    void insert(T item) {
+        if (tree == nullptr) {
+            tree = new Node(item);
+            return;
+        }
+
+        std::queue<Node*> nodes;
+        nodes.push(tree);
+
+        while (!nodes.empty()) {
+            
+            Node* node = nodes.front();
+            nodes.pop();
+
+            if (node->left == nullptr) {
+                node->left = new Node(item);
+                return;
+            } nodes.push(node->left);
+
+            if (node->right == nullptr) {
+                node->right = new Node(item);
+                return;
+            } nodes.push(node->right);
+        }
+    }
+
+    bool search_dfs(T item) {
+        return dfs_search(item, tree);
+    }
+
+    void delete_item(T item) {
+
+        if (tree == nullptr) return;
+
+        std::queue<Node*> nodes;
+        nodes.push(tree);
+        Node* target = nullptr;
+
+        while (!nodes.empty()) {
+            Node* curr = nodes.front();
+            nodes.pop();
+
+            if (curr->val == item) { 
+                target = curr;
+                break;
+            }
+
+            if (curr->left) nodes.push(curr->left);
+            if (curr->right) nodes.push (curr->right);
+        }
+
+        if (target == nullptr) return;
+
+        // a pair of child - parent nodes
+        std::pair<Node*, Node*> last_pair = {nullptr, nullptr};
+        
+        std::queue<std::pair<Node*, Node*>> pairs;
+        pairs.push({tree, nullptr});
+
+        while (!pairs.empty()) {
+            auto curr = pairs.front();
+            pairs.pop();
+
+            last_pair = curr;
+
+            if (curr.first->left) pairs.push({curr.first->left, curr.first});
+            if (curr.first->right) pairs.push({curr.first->right, curr.first});
+        }
+
+        Node* last_node = last_pair.first;
+        Node* last_parent = last_pair.second;
+
+        target->val = last_node->val;
+
+        if (last_parent == nullptr) { // if tree only has one item
+            delete last_node;
+            tree = nullptr;
+            return;
+        }
+        // you have to set LHS or RHS to nullptr, deleting it frees the memory, but wont nullfy it.
+        if (last_parent->left == last_node) last_parent->left = nullptr;
+        else last_parent->right = nullptr;
+        delete last_node;
+    }
+
+private:
+
+    void clear(Node* node) {
+        if (node) {
+            clear(node->left);
+            clear(node->right);
+            delete node;
+        }
+    }
+
+    Node* tree = nullptr;
+
+    void dfs_traversal(Node* tree) {
+        if (tree == nullptr) return;
+
+        dfs_traversal(tree->left);
+        std::cout << tree->val << " ";
+        dfs_traversal(tree->right);
+    }
+
+    bool dfs_search(T item, Node* tree) {
+        if (tree == nullptr) return false;
+
+        if (tree->val == item) return true;
+
+        bool lhs_result = dfs_search(item, tree->left);
+        bool rhs_result = dfs_search(item, tree->right);
+
+        return lhs_result || rhs_result;
+    }
+
+
+
+
+};
 
 
 
@@ -657,3 +843,5 @@ void test_DLL_6();
 void test_qu_1();
 
 void test_ht_1();
+
+void test_b_tree1();

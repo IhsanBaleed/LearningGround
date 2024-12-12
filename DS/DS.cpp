@@ -264,3 +264,28 @@ void test_ht_1() {
 
 }
 
+void test_b_tree1() {
+
+    std::vector<int> data {1,2,3,4,5,6,7};
+
+    BinaryTree tree(data);
+
+    tree.traversal_dfs();
+    tree.traversal_bfs();
+
+    tree.insert(10);
+    tree.insert(96);
+
+    tree.traversal_bfs();
+    tree.traversal_dfs();
+
+    int val = 90;
+    if (tree.search_dfs(val)) {
+        std::cout << "Found Val " << val << std::endl;
+    }
+
+    tree.delete_item(7);
+    tree.traversal_dfs();
+
+}
+

@@ -16,7 +16,7 @@
 
 int main() {
 
-    macro_func_1();
+    test_b_tree1();
 
     return 0;
 }
