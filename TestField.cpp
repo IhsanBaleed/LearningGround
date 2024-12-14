@@ -11,12 +11,11 @@
 #include <iomanip>
 
 #include "DS/DS.hh"
-#include "Macros/Macros.hh"
-
+#include "Lambda/Lambda.hh"
 
 int main() {
 
-    test_b_tree1();
+    lambda_test_1();
 
     return 0;
 }
