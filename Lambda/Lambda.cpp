@@ -1,7 +1,6 @@
 #include "Lambda.hh"
 
 #include <vector>
-#include <iostream>
 #include <algorithm>
 
 void lambda_test_1() {
@@ -75,7 +74,6 @@ void lambda_test_1() {
 
 }
 
-
 // this works, but might as well make a normal function
 auto dummy_lambda = []() {
     std::cout << "Dummy lambda" << std::endl;
@@ -87,4 +85,30 @@ void lambda_test_2() {
     // another_display(); 
     dummy_lambda();
 }
+
+void test_functor_1() {
+
+    Functor f1(4);
+    f1(22);
+
+    Functor f2(3);
+
+    int arr[] = {1, 2, 3, 4, 5};
+    int n = sizeof(arr)/sizeof(arr[0]);
+  
+    // Apply f2 to all elements of
+    // arr[] and store the modified elements
+    // back in arr[]
+    std::transform(arr, arr+n, arr, f2);
+    for (int i=0; i<n; i++)
+        std::cout << arr[i] <<" ";
+
+    // the compiler knows to call the () operator here
+    std::transform(arr, arr+n, arr, Functor(4));
+    for (int i=0; i<n; i++)
+        std::cout << arr[i] <<" ";
+}
+
+
+
 

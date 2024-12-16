@@ -15,7 +15,7 @@
 
 int main() {
 
-    lambda_test_1();
+    test_functor_1();
 
     return 0;
 }
