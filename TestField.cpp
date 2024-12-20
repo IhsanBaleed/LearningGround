@@ -1,10 +1,10 @@
 #include "DS/DS.hh"
 
-#include "DynamicAllocation/Dynamic.hh"
+#include "STL/STL.hh"
 
 int main() {
 
-    test_sll_1();
+    stack_test();
 
     return 0;
 }
