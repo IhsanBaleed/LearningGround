@@ -1,10 +1,9 @@
 #include "DS/DS.hh"
-
-#include "STL/STL.hh"
+#include "FuncPtr/FuncPtr.hh"
 
 int main() {
 
-    stack_test();
+    func_ptr_test_1();
 
     return 0;
 }

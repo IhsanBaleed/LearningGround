@@ -19,6 +19,7 @@ add_subdirectory(LR_Vals)
 add_subdirectory(Macros)
 add_subdirectory(DynamicAllocation)
 add_subdirectory(STL)
+add_subdirectory(FuncPtr)
 
 add_executable(TestField TestField.cpp)
 
@@ -38,5 +39,6 @@ target_link_libraries(TestField PUBLIC Pointers
                                        LR_Vals
                                        Macros
                                        Dynamic
-                                       STL)
+                                       STL
+                                       FuncPtr)
 
