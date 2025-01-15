@@ -21,6 +21,7 @@ add_subdirectory(DynamicAllocation)
 add_subdirectory(STL)
 add_subdirectory(FuncPtr)
 add_subdirectory(Exceptions)
+add_subdirectory(SandBox)
 
 add_executable(TestField TestField.cpp)
 
@@ -42,5 +43,6 @@ target_link_libraries(TestField PUBLIC Pointers
                                        Dynamic
                                        STL
                                        FuncPtr
-                                       Exceptions)
+                                       Exceptions
+                                       SandBox)
 
