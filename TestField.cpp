@@ -1,9 +1,12 @@
 #include "DS/DS.hh"
-#include "FuncPtr/FuncPtr.hh"
+#include "Exceptions/Exceptions.hh"
+
 
 int main() {
 
-    func_ptr_test_1();
+
+    test_exception_2();
+
 
     return 0;
 }
