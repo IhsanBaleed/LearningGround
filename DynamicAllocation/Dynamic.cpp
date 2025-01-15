@@ -52,6 +52,7 @@ void shared_ptr_test_1() {
     MyClass* raw_ptr_2 = new MyClass(12);
     std::shared_ptr<MyClass> ptr4(raw_ptr_2);
     std::shared_ptr<MyClass> ptr5(raw_ptr_2);
+    std::shared_ptr<MyClass> ptr6(ptr4);
 }
 
 void shared_ptr_test_2() {
