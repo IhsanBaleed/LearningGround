@@ -1,11 +1,10 @@
 #include "DS/DS.hh"
-#include "Exceptions/Exceptions.hh"
 
 
 int main() {
 
 
-    test_exception_2();
+    test_rb_tree_1();
 
 
     return 0;

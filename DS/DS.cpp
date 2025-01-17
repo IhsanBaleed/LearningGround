@@ -289,3 +289,21 @@ void test_b_tree1() {
 
 }
 
+void test_rb_tree_1() {
+
+    RedBlackTree<int> rbt;
+
+    rbt.insert(12);
+    rbt.insert(7);
+    rbt.insert(30);
+    rbt.insert(1);
+
+    std::cout << "Inorder traversal:" << std::endl;
+    rbt.inorder(); // Output: 1, 7, 12, 30
+
+    std::cout << rbt.search(1)->data << std::endl;
+
+    std::cout << rbt.search(12)->data << std::endl;
+
+}
+
