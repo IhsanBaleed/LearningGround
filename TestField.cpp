@@ -1,9 +1,9 @@
-#include "DS/DS.hh"
+#include "SandBox/SandBox.hh"
 
 
 int main() {
 
-    test_bs_tree_1();
+    test_sm();
 
     return 0;
 }
