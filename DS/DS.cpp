@@ -307,3 +307,34 @@ void test_rb_tree_1() {
 
 }
 
+void test_bs_tree_1() {
+
+    std::vector<int> data {1, 5, 88, 9, 6, 4, 33, 0, 255};
+    BST<int> bst(data);
+
+    bst.display_tree_dfs();
+    std::cout << std::endl;
+    bst.display_tree_bfs();
+
+    if (bst.find(5))
+        std::cout << "Found 5" << std::endl;
+
+    if (bst.find(99))
+        std::cout << "Found 99" << std::endl;
+
+    bst.insert(12);
+    bst.insert(44);
+
+    bst.display_tree_bfs();
+
+    bst.remove(6);
+    bst.display_tree_bfs();
+    bst.remove(1);
+    bst.remove(255);
+    bst.display_tree_bfs();
+
+    auto val = bst.search(4);
+
+    std::cout << val->data << std::endl;
+}
+

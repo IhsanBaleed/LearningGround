@@ -3,9 +3,7 @@
 
 int main() {
 
-
-    test_rb_tree_1();
-
+    test_bs_tree_1();
 
     return 0;
 }

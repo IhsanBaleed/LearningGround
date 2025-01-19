@@ -3,8 +3,7 @@
 #include <vector>
 #include <list>
 #include <queue>
-
-// array, map
+#include <algorithm>
 
 template <typename T>
 class Stack {
@@ -1015,6 +1014,187 @@ public:
 
 };
 
+template <typename T>
+class BST {
+    /* Stores data in a sorted manner
+     * Left Node < Parent < Right Node
+     * Allows for efficient operations
+    */
+private:
+   struct Node {
+        T data;
+        Node* left;
+        Node* right;
+        Node(T data) : data(data) {
+            left = nullptr;
+            right = nullptr;
+        }
+   };
+
+    Node* root = nullptr;
+
+    Node* construct_tree(std::vector<T>& data, int start, int end) {
+        if (start > end)
+            return nullptr;
+        
+        int mid = start + (end - start) / 2;
+        Node* node = new Node(data[mid]);
+        node->left =  construct_tree(data, start, mid-1);
+        node->right = construct_tree(data, mid +1, end);
+        return node;
+    }
+
+    void assign_tree(std::vector<T>& data) {
+        std::sort(data.begin(), data.end());
+        root = construct_tree(data, 0, data.size()-1);
+    }
+
+    bool find(T item, Node* node) {
+        if (node == nullptr)
+            return false;
+        
+        if (item == node->data)
+            return true;
+        
+        bool l_search;
+        bool r_search;
+
+        if (item > node->data) {
+            l_search = find(item, node->right);
+        } else if (item < node->data) {
+            r_search = find(item, node->left);
+        }
+        
+        return (l_search || r_search);
+    }
+
+    Node* insert (T item, Node* node) {
+        if (node == nullptr)
+            node = new Node(item);
+
+        if (item > node->data) {
+            node->right = insert(item, node->right);
+        }
+        else if (item < node->data) {
+            node->left = insert(item, node->left);
+        }
+        
+        return node;
+    }
+
+    Node* search(T key, Node* node) {
+        if (node == nullptr || node->data == key)
+            return node;
+
+        if (key > node->data)
+            return search(key, node->right);
+        else 
+            return search(key, node->left);
+    }
+
+    Node* find_successor(Node* curr) { 
+        // go right once
+        // then keep going left until u get a null
+        curr = curr->right;
+        while (curr != nullptr && curr->left != nullptr)
+            curr = curr->left;
+        return curr;
+    }
+
+    Node* remove(T item, Node* node) {
+        
+        if (node == nullptr)
+            return node;
+        
+        if (node->data > item)
+            node->left = remove(item, node->left);
+        else if (node->data < item)
+            node->right = remove(item, node->right);
+        else {
+
+            if (node->left == nullptr) {
+                Node* temp = node->right;
+                delete node;
+                return temp;
+            }
+
+            if (node->right == nullptr) {
+                Node* temp = node->right;
+                delete node;
+                return temp;
+            }
+
+            // both nodes are present
+            Node* succ = find_successor(node);
+            node->data = succ->data;
+            // when removing any part of thre tree, you must update the parent branch
+            node->right = remove(succ->data, node->right);
+        }
+        return node;
+    }
+
+    void display_tree_dfs(Node* node) {
+        if (node == nullptr)
+            return;
+        display_tree_dfs(node ->left);
+        std::cout << node->data << " ";
+        display_tree_dfs(node->right);
+    }
+
+public:
+
+    BST(std::vector<T> data) {
+        assign_tree(data);
+    }
+
+    void display_tree_dfs() {
+        display_tree_dfs(root);
+    }
+
+    void display_tree_bfs() {
+
+        if (root == nullptr)
+            return;
+        
+        std::queue<Node*> nodes;
+        nodes.push(root);
+
+        while(!nodes.empty()) {
+            Node* curr = nodes.front();
+            nodes.pop();
+
+            std::cout << curr->data << " ";
+
+            if (curr->left != nullptr) {
+                nodes.push(curr->left);
+            }
+
+            if (curr->right != nullptr) {
+                nodes.push(curr->right);
+            }
+        }
+
+        std::cout << std::endl;
+    }
+
+    bool find(T item) {
+        return find(item, root);
+    }
+
+    void insert(T item) {
+        root = insert(item, root);
+    }
+
+    Node* search(T key) {
+        return search(key, root);
+    }
+
+    Node* remove(T item) {
+        return remove(item, root);
+    }
+
+};
+
 // Testing ---------------------------------------
 void test_stack_1();
 
@@ -1036,3 +1216,5 @@ void test_ht_1();
 void test_b_tree1();
 
 void test_rb_tree_1();
+
+void test_bs_tree_1();
