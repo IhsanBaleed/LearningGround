@@ -3,7 +3,7 @@
 
 int main() {
 
-    test_sm();
+    test_dll();
 
     return 0;
 }

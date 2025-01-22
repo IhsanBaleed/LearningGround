@@ -2,17 +2,18 @@
 
 #include <iostream>
 #include <memory>
+#include <exception>
 
-class DT {
+class DataType {
 
 public:
 
-    DT () {
-        std::cout << "DT Construct" << std::endl;
+    DataType () {
+        std::cout << "DataType Construct" << std::endl;
     }
 
-    ~DT() {
-        std::cout << "DT Destruct" << std::endl;
+    ~DataType() {
+        std::cout << "DataType Destruct" << std::endl;
     }
 
 };
@@ -73,6 +74,312 @@ public:
         delete[] stack;
         max_size = new_size;
         stack = new_stack;
+    }
+};
+
+template <typename T>
+class Queue {
+
+    struct Node {
+        Node* next = nullptr;
+        T data;
+        Node(T item) {
+            data = item;
+        }
+        ~Node() {
+            std::cout << "Node Destroyed " << data << std::endl;
+        }
+    };
+
+    int size_ = 0;
+
+    Node* front = nullptr;
+    Node* rear = nullptr;
+
+public:
+
+    ~Queue() {
+        
+        while (!empty())
+            dequeue();
+    }
+    
+    void queue(T item) {
+
+        if (front == nullptr) {
+            front = new Node(item);
+            rear = front;
+        } else {
+            Node* node = new Node(item);
+            rear->next = node;
+            rear = node;
+        }
+        size_ ++;
+    }
+
+    void dequeue() {
+        if (front == nullptr) {
+            std::cout << "Queue is Empty!" << std::endl;
+            return;
+        }
+
+        Node* tmp = front;
+        front = front->next;
+
+        if (front == nullptr)
+            rear = front;
+
+        delete tmp;
+        size_--;
+    }
+
+    void display() {
+        Node* curr = front;
+
+        while (curr != nullptr) {
+            std::cout << curr->data << " ";
+            curr = curr->next;
+        }
+        std::cout << std::endl;
+    }
+
+    T peek() {
+        if (front != nullptr)
+            return front->data;
+        return T();
+    }
+
+    bool empty() {
+        return front == nullptr;
+    }
+
+    int size() {
+        return size_;
+    }
+
+};
+
+template <typename T>
+class DoubleLinkedList {
+
+    struct Node {
+        Node* next;
+        Node* prev;
+        T data;
+
+        Node(T item) {
+            data = item;
+            next = nullptr;
+            prev = nullptr;
+        }
+
+        ~Node() {
+            std::cout << "Node Destroyed " << data << std::endl;
+        }
+    };
+    
+    Node* start = nullptr;
+    Node* end = nullptr;
+    uint size_ = 0;
+
+public:
+
+    ~DoubleLinkedList() {
+        clear();
+    }
+
+    void prepend(T item) {
+        if (start == nullptr) {
+            start = new Node(item);
+            end = start;
+        } else {
+            Node* new_node = new Node(item);
+
+            start->prev = new_node;
+            new_node->next = start;
+            start = new_node;
+        }
+        size_++;
+    }
+
+    void append(T item) {
+        if (end == nullptr) {
+            start = new Node(item);
+            end = start;
+        } else {
+            Node* new_node = new Node(item);
+
+            end->next = new_node;
+            new_node->prev = end;
+            end = new_node;
+        }
+        size_++;
+    }
+
+    void insert_at_index(int index, T item) {
+        if (index < 0 || index > size_)
+            return;
+        
+        if (index == 0) {
+            prepend(item);
+            return;
+        }
+        
+        if (index == size_) {
+            append(item);
+            return;
+        }
+
+        Node* before = start;
+        for (int i=1; i<index; i++) {
+            before = before->next;
+        }
+        Node* new_node = new Node(item);
+        Node* after = before->next;
+
+        new_node->next = after;
+        after->prev = new_node;
+
+        new_node->prev = before;
+        before->next = new_node;
+        size_++;      
+    }
+
+    void pop_front() {
+        if (start != nullptr) {
+            if (start == end) {
+                delete start;
+                end = nullptr;
+                start = nullptr;
+            } else {
+                Node* new_start = start->next;
+                delete start;
+                start = new_start;
+                if (start == end) {
+                    start->next = nullptr;
+                    start->prev = nullptr;
+                }
+            }
+            size_--;
+        }
+    }
+
+    void pop_back() {
+        if (end != nullptr) {
+            if (start == end) {
+                delete start;
+                end = nullptr;
+                start = nullptr;
+            } else {
+                Node* new_end = end->prev;
+                delete end;
+                end = new_end;
+                if (start == end) {
+                    start->next = nullptr;
+                    start->prev = nullptr;
+                }
+            }
+            size_--;
+        }
+    }
+
+    void delete_at_index(int index) {
+        if (start != nullptr) {
+
+            if (index == 0)
+                pop_front();
+            else if (index == size_-1)
+                pop_back();
+            else if (index < size_ && index > 0) {
+                Node* before = start;
+
+                for (int i=1; i<index; i++)
+                    before = before->next;
+                
+                Node* target = before->next;
+                Node* after = target->next;
+                
+                before->next = after;
+                after->prev = before;
+
+                delete target;
+                size_--;
+            }
+        }
+    }
+
+    void traves_from_start() {
+        Node* curr = start;
+        while(curr != nullptr) {
+            std::cout << curr->data << " ";
+            curr = curr->next;
+        }
+        std::cout << std::endl;
+    }
+
+    void traves_from_end() {
+        Node* curr = end;
+        while(curr != nullptr) {
+            std::cout << curr->data << " ";
+            curr = curr->prev;
+        }
+        std::cout << std::endl;
+    }
+
+    T get_item(uint index) {
+        if (start != nullptr && index < size_) {
+            Node* curr = start;
+
+            for (int i=0; i<index; i++)
+                curr = curr->next;
+
+            return curr->data;
+        } else 
+            throw std::out_of_range("Out of Range");
+    }
+
+    T get_front() {
+        if (start != nullptr)
+            return start->data;
+        throw std::out_of_range("Empty List");
+    }
+
+    T get_end() {
+        if (end != nullptr)
+            return end->data;
+        throw std::out_of_range("Empty List");
+    }
+
+    void assign(uint index, T val) {
+        if (start != nullptr && index < size_) {
+            Node* curr = start;
+
+            for (int i=0; i<index; i++)
+                curr = curr->next;
+
+            curr->data = val;
+        } else 
+            throw std::out_of_range("Out of Range");
+    }
+
+    bool is_empty() {
+        return start == nullptr;
+    }
+
+    int get_size() {
+        return size_;
+    }
+
+    void clear() {
+        Node* curr = start;
+        while (curr != nullptr) {
+            Node* target = curr;
+            curr = curr->next;
+            delete target;
+            size_--;
+        }
+        start = nullptr;
+        end = nullptr;
     }
 };
 
@@ -165,3 +472,7 @@ public:
 };
 
 void test_sm();
+
+void test_queue();
+
+void test_dll();
