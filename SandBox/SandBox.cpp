@@ -102,4 +102,23 @@ void test_dll() {
 
 }
 
+void test_multi_interface_imp() {
+
+    // the concrete class can be used in place
+    // of either interfaces
+    // each interface has access only to its own methods
+    // you cant use the interfaces in a class fashion, duh!
+
+    Concrete c1(1, "abc");
+
+    InterfaceA* i_a = &c1;
+    i_a->method_a();
+
+    InterfaceB* i_b = &c1;
+    i_b->method_b();
+
+    c1.method_a();
+    c1.method_b();
+}
+
 

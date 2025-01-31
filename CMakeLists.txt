@@ -22,6 +22,7 @@ add_subdirectory(STL)
 add_subdirectory(FuncPtr)
 add_subdirectory(Exceptions)
 add_subdirectory(SandBox)
+add_subdirectory(Algorithms)
 
 add_executable(TestField TestField.cpp)
 
@@ -44,5 +45,6 @@ target_link_libraries(TestField PUBLIC Pointers
                                        STL
                                        FuncPtr
                                        Exceptions
-                                       SandBox)
+                                       SandBox
+                                       Algorithms)
 

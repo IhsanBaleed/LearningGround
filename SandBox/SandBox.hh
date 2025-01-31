@@ -383,6 +383,8 @@ public:
     }
 };
 
+
+
 class StateMachine {
 
     class Context {
@@ -471,8 +473,51 @@ public:
 
 };
 
+class InterfaceA {
+
+    int val;
+
+public:
+
+    InterfaceA(int dummy_val) : val(dummy_val) {}
+
+    virtual void method_a() = 0;
+
+};
+
+class InterfaceB {
+
+    std::string val;
+
+public:
+
+    InterfaceB(std::string dummy_str) : val(dummy_str) {}
+
+    virtual void method_b() = 0;
+
+};
+
+class Concrete : public InterfaceA, public InterfaceB {
+
+public:
+
+    Concrete(int val1, std::string val2) : InterfaceB(val2) , InterfaceA(val1) {}
+
+    void method_a() override {
+        std::cout << "Method A" << std::endl;
+    }
+
+    void method_b() override {
+        std::cout << "Method B" << std::endl;
+    }
+
+};
+
+
 void test_sm();
 
 void test_queue();
 
 void test_dll();
+
+void test_multi_interface_imp();

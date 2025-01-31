@@ -1,9 +1,9 @@
 #include "SandBox/SandBox.hh"
-
+#include "Algorithms/Algorithms.hh"
 
 int main() {
 
-    test_dll();
+    binary_search_test();
 
     return 0;
 }
