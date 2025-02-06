@@ -2,6 +2,10 @@ cmake_minimum_required(VERSION 3.0)
 
 project(TestField)
 
+# Enable C++17 standard
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
 add_subdirectory(Pointers)
 add_subdirectory(Const)
 add_subdirectory(Classes)

@@ -180,7 +180,7 @@ class DoubleLinkedList {
     
     Node* start = nullptr;
     Node* end = nullptr;
-    uint size_ = 0;
+    std::size_t size_ = 0;
 
 public:
 
@@ -326,7 +326,7 @@ public:
         std::cout << std::endl;
     }
 
-    T get_item(uint index) {
+    T get_item(std::size_t index) {
         if (start != nullptr && index < size_) {
             Node* curr = start;
 
@@ -350,7 +350,7 @@ public:
         throw std::out_of_range("Empty List");
     }
 
-    void assign(uint index, T val) {
+    void assign(std::size_t index, T val) {
         if (start != nullptr && index < size_) {
             Node* curr = start;
 
