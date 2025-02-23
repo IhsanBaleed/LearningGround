@@ -1,9 +1,11 @@
 #include "SandBox/SandBox.hh"
 #include "Algorithms/Algorithms.hh"
+#include "Misc/Misc.hh"
+
 
 int main() {
 
-    binary_search_test();
+    test_Anon();
 
     return 0;
 }
