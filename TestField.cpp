@@ -5,7 +5,7 @@
 
 int main() {
 
-    test_Anon();
+    DT_Sizes::show_sizes();
 
     return 0;
 }

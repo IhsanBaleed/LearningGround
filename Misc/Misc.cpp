@@ -41,4 +41,3 @@ void test_Anon() {
 	// they are best used with operator overloading
 	// you can also use them when you dont need a reference to an object, thus saving memory
 }
-
