@@ -21,7 +21,6 @@ public:
     int size = 0;
 };
 
-
 class dummy {
 
 public:
@@ -90,6 +89,54 @@ public:
 };
 
 
+class MyClass {
+
+    std::string* data;
+
+public:
+
+    MyClass(std::string obj_name) {
+        data = new std::string(obj_name);
+    }
+
+    ~MyClass() {
+        if (data)
+            delete data;
+    }
+
+    MyClass(const MyClass& src) {
+        this->data = new std::string(*src.data);
+        std::cout << "Copy constructor called" << std::endl;
+    }
+
+    // move constructor
+    // if the source has other data, you should use std::move on them
+    MyClass(MyClass&& src) {
+        // "steal" the pointer address
+        // then set the source to null, thus it wont be double deleted
+        this->data = src.data;
+        src.data = nullptr;
+        std::cout << "Move constructor called" << std::endl;
+    }
+
+    // move operator returns a ref object
+    // they take a mutable rvalue just like move constructor
+    MyClass& operator= (MyClass&& src) {
+
+        // always check for self assignment
+        if (this == &src)
+            return *this;
+        
+        this->data = src.data;
+        src.data = nullptr;
+        std::cout << "Move operator called" << std::endl;
+
+        // always return the object
+        return *this;
+    }
+
+};
+
 void test_case();
 
 void test_case_2();
@@ -101,3 +148,8 @@ void test_case_4();
 void test_case_5();
 
 void test_case_6();
+
+void test_case_7();
+
+void test_case_8();
+

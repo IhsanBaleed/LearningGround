@@ -70,3 +70,47 @@ void test_case_6() {
     std::cout << t << std::endl;
 }
 
+void test_case_7() {
+
+    MyClass* s1;
+    {
+        MyClass s("S1 class");
+        s1 = &s;
+    }
+
+    // this calls the copy constructor
+    // the memory address of the pointers will be the same
+    // could be dangrous as we could have a dangling pointer
+    // MyClass s2(*s1); 
+
+
+    // copy constructor is also called here
+    // constructors are always called during object initialization
+    MyClass s3("S3 class");
+    MyClass s2 = s3; 
+
+}
+
+void test_scope(MyClass*& s2_ptr) {
+
+    MyClass s("S class");
+
+    s2_ptr = new MyClass(std::move(s));
+}
+
+void test_case_8() {
+
+    // moved objects are still valid
+    // but their state is unspecified 
+    // they are unsafe to access
+    MyClass s1("S1 class");
+    MyClass s2(std::move(s1));
+
+    MyClass* ptr;
+    test_scope(ptr);
+
+    MyClass s3("S3 class");
+
+    s1 = std::move(s3);
+
+}
